@@ -20,7 +20,11 @@
                                     <label class="form-label fw-bold">Nama</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
+<<<<<<< HEAD
                                         <input type="text" name="name" class="form-control"
+=======
+                                        <input type="text" name="name[]" class="form-control"
+>>>>>>> 978543af861d2e6d23359ce1c10ca3c8c4eb3c90
                                             value="{{ auth()->user()->name }}" readonly>
                                     </div>
                                 </div>
@@ -29,7 +33,11 @@
                                     <label class="form-label fw-bold">Departemen</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-building"></i></span>
+<<<<<<< HEAD
                                         <input type="text" name="department" class="form-control"
+=======
+                                        <input type="text" name="department[]" class="form-control"
+>>>>>>> 978543af861d2e6d23359ce1c10ca3c8c4eb3c90
                                             value="{{ auth()->user()->department->nama ?? '-' }}" readonly>
                                     </div>
                                 </div>
@@ -38,7 +46,11 @@
                                     <label class="form-label fw-bold">Tanggal Lembur</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+<<<<<<< HEAD
                                         <input type="date" name="tanggal" class="form-control" required>
+=======
+                                        <input type="date" name="tanggal[]" class="form-control" required>
+>>>>>>> 978543af861d2e6d23359ce1c10ca3c8c4eb3c90
                                     </div>
                                 </div>
 
@@ -46,11 +58,16 @@
                                     <label class="form-label fw-bold">Jam Kerja</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-clock"></i></span>
+<<<<<<< HEAD
                                         <input type="text" name="jam_kerja" class="form-control"
+=======
+                                        <input type="text" name="jam_kerja[]" class="form-control"
+>>>>>>> 978543af861d2e6d23359ce1c10ca3c8c4eb3c90
                                             placeholder="Contoh: 16:00 - 19:00" required>
                                     </div>
                                 </div>
 
+<<<<<<< HEAD
                                 <!-- <div class="col-md-6">
                                     <label class="form-label fw-bold">Jumlah Jam Kerja</label>
                                     <div class="input-group">
@@ -63,6 +80,11 @@
                                 <div class="col-12">
                                     <label class="form-label fw-bold">Keterangan</label>
                                     <textarea name="keterangan" rows="3" class="form-control"
+=======
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Keterangan</label>
+                                    <textarea name="keterangan[]" rows="3" class="form-control"
+>>>>>>> 978543af861d2e6d23359ce1c10ca3c8c4eb3c90
                                         placeholder="Tulis keterangan jika perlu..."></textarea>
                                 </div>
                             </div>
@@ -77,8 +99,12 @@
                             <i class="fas fa-user-plus me-2"></i>Tambah Teman
                         </a>
                         <button type="submit" class="btn btn-primary rounded-pill px-4">
+<<<<<<< HEAD
                             <a href="{{ route('lemburSaya') }}"></a>
                             <i class="fas fa-paper-plane me-2" ></i>Submit
+=======
+                            <i class="fas fa-paper-plane me-2"></i>Submit
+>>>>>>> 978543af861d2e6d23359ce1c10ca3c8c4eb3c90
                         </button>
                     </div>
                 </form>
@@ -106,4 +132,8 @@
             });
         });
     </script>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> 978543af861d2e6d23359ce1c10ca3c8c4eb3c90
