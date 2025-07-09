@@ -9,7 +9,7 @@
 
       <div class="nav-toggle">
         <button class="btn btn-toggle toggle-sidebar">
-          <i class="gg-menu-right"></i> 
+          <i class="gg-menu-right"></i>
         </button>
         <button class="btn btn-toggle sidenav-toggler">
           <i class="gg-menu-left"></i>
@@ -25,7 +25,7 @@
     <div class="sidebar-content">
       <ul class="nav nav-secondary">
         <li class="nav-item active">
-          <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+          <a href="{{ route('home') }}" class="nav-link">
             <i class="fas fa-home"></i>
             <p>Dashboard</p>
           </a>
@@ -55,8 +55,8 @@
           <div class="collapse" id="base">
             <ul class="nav nav-collapse">
               <li><a href="{{ route('lembur.form') }}"><span class="sub-item">Pengajuan Lembur</span></a></li>
-              <li><a href="#"><span class="sub-item"></span>Pengajuan Lembur Actual</a></li>
-              <li><a href="#"><span class="sub-item">Sisa Lembur</span></a></li>
+              <li><a href="{{ route('lembur.formActual') }}"><span class="sub-item"></span>Pengajuan Lembur Actual</a></li>
+              <li><a href="#"><span class="sub-item">Lembur Saya</span></a></li>
             </ul>
           </div>
         </li>
@@ -228,7 +228,7 @@
         </li> -->
       </ul>
 
-      
+
     </div>
   </div>
 </div>
