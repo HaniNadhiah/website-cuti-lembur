@@ -1,10 +1,7 @@
 <?php
 
-use App\Http\Controllers\adminHRController;
-use App\Http\Controllers\GeneralManagerController;
-use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\LemburController;
-use App\Http\Controllers\managerController;
+
+use App\Http\Controllers\PengajuanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,14 +10,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::middleware(['auth', 'role:adminhr'])->get('/dashboard-adminhr', [adminHRController::class, 'index']);
-// Route::middleware(['auth', 'role:karyawan'])->get('/dashboard-karyawan', [KaryawanController::class, 'index']);
-// Route::middleware(['auth', 'role:manager'])->get('/dashboard-manager', [managerController::class, 'index']);
-// Route::middleware(['auth', 'role:gm'])->get('/dashboard-gm', [GeneralManagerController::class, 'index']);
+// cuti
+Route::get('/cuti-form', [PengajuanController::class, 'formCuti'])->name('cuti.Form');
+// lembur
+Route::get('/lembur-form', [PengajuanController::class, 'formLembur'])->name('lembur.form');
+Route::get('/lembur-actual-form', [PengajuanController::class, 'formActual'])->name('lembur.formActual');
+Route::post('/lembur-store', [PengajuanController::class, 'store'])->name('lembur.store');
+Route::post('/lembur-actual', [PengajuanController::class, 'Actual'])->name('lembur.storeActual');
+Route::post('/lembur-saya', [PengajuanController::class, 'LemburSaya'])->name('lemburSaya');
+// Route::get('/lembur-saya', [PengajuanController::class, 'Actual'])->name('lembur.storeActual');
 
 
-Route::get('/lembur-form', [LemburController::class, 'form'])->name('lembur.form');
-Route::post('/lembur-store', [LemburController::class, 'store'])->name('lembur.store');
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name(name: 'home');
