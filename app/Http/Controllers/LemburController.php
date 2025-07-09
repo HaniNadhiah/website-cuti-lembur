@@ -1,38 +1,35 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Lembur;
 use Illuminate\Http\Request;
 
 class LemburController extends Controller
 {
 
-    public function form(){
+    public function form()
+    {
         return view("Form.formLembur");
     }
 
     public function store(Request $request)
     {
+        $names = $request->input('name');
+        $departments = $request->input('department');
+        $tanggals = $request->input('tanggal');
+        $jams = $request->input('jam_kerja');
+        $keterangans = $request->input('keterangan');
 
-        $request->validate([
-            'lembur.*.nama' => 'required|string',
-            'lembur.*.department' => 'required|string',
-            'lembur.*.tanggal' => 'required|date',
-            'lembur.*.jam_kerja' => 'required|string',
-            'lembur.*.keterangan' => 'nullable|string',
-        ]);
-
-        foreach ($request->lembur as $item) {
-            Lembur::create([
-                'user_id' => auth()->id(),
-                'department_id' => auth()->user()->department_id,
-                'tanggal' => $item['tanggal'],
-                'jam_kerja' => $item['jam_kerja'],
-                'keterangan' => $item['keterangan'] ?? null,
+        for ($i = 0; $i < count($tanggals); $i++) {
+            \App\Models\Lembur::create([
+                'name' => $names[$i],
+                'department' => $departments[$i],
+                'tanggal' => $tanggals[$i],
+                'jam_kerja' => $jams[$i],
+                'keterangan' => $keterangans[$i],
             ]);
         }
 
-        return redirect()->back()->with('success', 'Pengajuan lembur berhasil dikirim.');
+        return redirect()->route('lembur.index')->with('success', 'Pengajuan lembur berhasil dikirim.');
     }
+
 }
