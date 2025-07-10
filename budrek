@@ -1,0 +1,279 @@
+index
+@extends('dashboard.base')
+
+@section('title', 'Data Alergi')
+
+@section('content')
+
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center rounded-top">
+                <h4 class="mb-0">Data Alergi</h4>
+                <a href="{{ route('form.alergi') }}" class="btn btn-light btn-sm rounded">
+                    <i class="fas fa-plus-circle me-1"></i> Tambah Alergi
+                </a>
+            </div>
+
+            <div class="card-body">
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-1"></i> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if (Session::get('Update'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ Session::get('Update') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if (Session::get('Delete'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ Session::get('Delete') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped align-middle text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>No</th>
+                                <th>Foto</th>
+                                <th>Nama Alergi</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($alergi as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="{{ asset($item->foto) }}" width="80" class="img-thumbnail">
+                                    </td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>
+                                        <a href="{{ route('edit.alergi', $item->id) }}" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <form action="{{ route('delete.alergi', $item->id) }}" method="POST"
+                                            style="display:inline-block;"
+                                            onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">Belum ada data alergi.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+
+create
+@extends('dashboard.base')
+
+@section('title', 'Tambah Alergi')
+
+@section('content')
+<div class="card shadow-sm rounded">
+    <div class="card-header bg-dark text-white">
+        <h4 class="mb-0">Tambah Alergi</h4>
+    </div>
+    <div class="card-body">
+        <form action="{{ route('create.alergi') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama Alergi</label>
+                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
+                @error('nama') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="foto" class="form-label">Foto Alergi</label>
+                <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror">
+                @error('foto') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save me-1"></i> Simpan
+            </button>
+        </form>
+    </div>
+</div>
+@endsection
+
+
+edit
+@extends('dashboard.base')
+
+@section('title', 'Edit Alergi')
+
+@section('content')
+<div class="card shadow-sm rounded">
+    <div class="card-header bg-dark text-white">
+        <h4 class="mb-0">Edit Alergi</h4>
+    </div>
+    <div class="card-body">
+        <form action="{{ route('update.alergi', $alergi->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf @method('PUT')
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama Alergi</label>
+                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
+                    value="{{ old('nama', $alergi->nama) }}">
+                @error('nama') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="foto" class="form-label">Foto Alergi</label><br>
+                @if($alergi->foto)
+                    <img src="{{ asset($alergi->foto) }}" width="100" class="img-thumbnail mb-2"><br>
+                @endif
+                <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror">
+                @error('foto') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save me-1"></i> Update
+            </button>
+        </form>
+    </div>
+</div>
+@endsection
+
+
+controller
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Alergi;
+use Illuminate\Http\Request;
+
+class AlergiController extends Controller
+{
+    public function index()
+    {
+        $alergi = Alergi::latest()->get();
+        return view('Admin.Data Alergi.alergi', compact('alergi'));
+    }
+
+    public function formAlergi()
+    {
+        return view('Admin.Data Alergi.createAlergi');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $data = $request->only('nama');
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/alergi'), $filename);
+            $data['foto'] = 'uploads/alergi/' . $filename;
+        }
+
+        Alergi::create($data);
+
+        return redirect()->route('index.alergi')->with('success', 'Data alergi berhasil ditambahkan.');
+    }
+
+    public function edit(Alergi $alergi)
+    {
+        return view('Admin.Data Alergi.editAlergi', compact('alergi'));
+    }
+
+    public function update(Request $request, Alergi $alergi)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $data = $request->only('nama');
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/alergi'), $filename);
+            $data['foto'] = 'uploads/alergi/' . $filename;
+        }
+
+        $alergi->update($data);
+
+        return redirect()->route('index.alergi')->with('Update', 'Data alergi berhasil diperbarui.');
+    }
+
+    public function destroy(Alergi $alergi)
+    {
+        if ($alergi->foto && file_exists(public_path($alergi->foto))) {
+            unlink(public_path($alergi->foto));
+        }
+
+        $alergi->delete();
+
+        return redirect()->route('index.alergi')->with('Delete', 'Data alergi berhasil dihapus.');
+    }
+
+}
+
+
+sidebar
+  @if (Auth::user()->role ==1)
+    @include('Dashboard.Menu.menuAdmin')
+      @elseif(Auth::user()->role ==2)
+      @include('Dashboard.Menu.menuUser')
+  @endif
+
+header
+<ul class="dropdown-menu">
+                        @if (Auth::user()->role == 1)
+                            <li><a href="{{ route('index.home') }}" class="dropdown-item">Dashboard</a></li>
+                        @elseif(Auth::user()->role == 2)
+                        @endif
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Keluar
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+
+handle adminMiddleware
+public function handle(Request $request, Closure $next): Response
+    {
+        if(Auth::check()){
+            // check = buat ngecek role udah ada apa belom 
+            if(Auth::user()->role == 1){
+                return $next($request);
+            }else{
+                return redirect('/dashboard-user');
+            }
+        }else{
+            return redirect('/login');
+        }
+    }
