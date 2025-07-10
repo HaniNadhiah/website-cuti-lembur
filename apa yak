@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Nutec</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    {{-- buat tittle web ny yg diatas --}}
+    <link rel="icon" href="{{ asset('assets/img/LogooNutec.png') }}" type="image/x-icon" />
+
+    <!-- Memuat Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    {{-- untuk sort --}}
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- Fonts and icons -->
+    <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ["Public Sans:300,400,500,600,700"]
+            },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["assets/css/fonts.min.css"],
+            },
+            active: function() {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Pilih bahan",
+                allowClear: true
+            });
+        });
+    </script>
+    @section('head')
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @endsection
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+    {{-- ini tuk komentar di table forum --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        h2 {
+            font-size: 30px;
+            /* untuk ukuran font */
+            text-align: center;
+            /* ngetengahin */
+            font-family: 'Times New Roman', Times, serif;
+            /* tuk gaya font ny */
+
+        }
+
+        .heading {
+            text-align: center;
+            padding: 4.5rem 0;
+            border-radius: 4px;
+            color: #89A8B2
+        }
+
+        .heading span {
+            background: rgba(81, 90, 211, 0.2);
+
+            /* border-radius: 4px; */
+            border-radius: .9rem;
+            padding: .9rem 2rem;
+        }
+
+        .heading span.space {
+            background: none;
+            border-radius: 4px;
+        }
+
+        .media {
+            width: 100%;
+            overflow-x: scroll;
+            /* overflow-x tuk ke samping overflow-y ke bawah */
+            white-space: nowrap;
+            margin: 20px 0;
+            border-radius: 4px;
+
+        }
+
+        .contentMedia {
+            display: inline-block;
+            background-color: black;
+        }
+
+        .contentMedia img {
+            width: 250px;
+            height: 200px;
+            display: inline-block;
+            margin: 10px;
+            border-radius: 4px;
+        }
+
+        /* Navbar Styles */
+
+        /* .navbar .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px;
+      }
+
+      .navbar .menu {
+          display: flex;
+          gap: 20px;
+      }
+
+      .menu li {
+          list-style: none;
+      }
+
+      .menu li a {
+          text-decoration: none;
+          color: #fff;
+          font-weight: bold;
+      }
+
+      .navbar-toggler {
+          display: none;
+          font-size: 2rem;
+          color: #fff;
+          cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+          .navbar .menu {
+              display: none;
+              flex-direction: column;
+              gap: 10px;
+              background-color: #333;
+              padding: 20px;
+              position: absolute;
+              top: 60px;
+              right: 0;
+              width: 250px;
+          }
+
+          .navbar .menu.show {
+              display: flex;
+          }
+
+          .navbar-toggler {
+              display: block;
+          }
+      } */
+
+
+        /* Mengatur ikon sorting */
+        /* table.dataTable thead .sorting {
+      background-image: url('https://cdn.datatables.net/1.10.16/images/sort_both.png');
+      background-repeat: no-repeat;
+      background-position: center right;
+      color: black
+  }
+  table.dataTable thead .sorting_asc {
+      background-image: url('https://cdn.datatables.net/1.10.16/images/sort_asc.png');
+  }
+  table.dataTable thead .sorting_desc {
+      background-image: url('https://cdn.datatables.net/1.10.16/images/sort_desc.png');
+  } */
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .card.dark-mode {
+            background-color: #1e1e1e;
+            border-color: #333333;
+        }
+
+        .table-dark {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-color: #333333;
+        }
+
+        .alert-dark {
+            background-color: #2e2e2e;
+            color: #ffffff;
+            border-color: #444444;
+        }
+
+        .btn-dark-mode {
+            background-color: #333333;
+            color: #ffffff;
+            border-color: #444444;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+        <!-- Sidebar -->
+        @include('dashboard.sidebar')
+        <!-- End Sidebar -->
+
+
+        {{-- main content --}}
+        <div class="main-panel">
+            @include('dashboard.header')
+
+            <div class="main-content" style="padding-top: 85px;">
+                @yield('content')
+            </div>
+
+
+        </div>
+    </div>
+
+        @include('dashboard.footer')
+    {{-- end main content --}}
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    </div>
+    <!--   Core JS Files   -->
+    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+
+    <!-- Chart JS -->
+    <script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+
+    <!-- Chart Circle -->
+    <script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
+
+    <!-- Datatables -->
+    <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="{{ asset('assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugin/jsvectormap/world.js') }}"></script>
+
+    <!-- Sweet Alert -->
+    <script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="{{ asset('assets/js/setting-demo.js') }}"></script>
+    <script src="{{ asset('assets/js/demo.js') }}"></script>
+    <script>
+        $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#177dff",
+            fillColor: "rgba(23, 125, 255, 0.14)",
+        });
+
+        $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#f3545d",
+            fillColor: "rgba(243, 84, 93, .14)",
+        });
+
+        $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#ffa534",
+            fillColor: "rgba(255, 165, 52, .14)",
+        });
+    </script>
+
+    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleDarkMode = document.getElementById('toggleDarkMode');
+            const body = document.body;
+
+            // Check local storage for dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+                toggleDarkMode.textContent = 'Light Mode';
+            }
+
+            toggleDarkMode.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('darkMode', 'disabled');
+                    toggleDarkMode.textContent = 'Dark Mode';
+                } else {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('darkMode', 'enabled');
+                    toggleDarkMode.textContent = 'Light Mode';
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
