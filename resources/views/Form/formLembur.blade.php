@@ -20,17 +20,18 @@
                                     <label class="form-label fw-bold">Nama</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                        <input type="text" name="name[]" class="form-control"
+
+                                        <input type="text" name="name" class="form-control"
                                             value="{{ auth()->user()->name }}" readonly>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label fw-bold">Departemen</label>
+                                    <label class="form-label fw-bold">Departments</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-building"></i></span>
-                                        <input type="text" name="department[]" class="form-control"
-                                            value="{{ auth()->user()->department->nama ?? '-' }}" readonly>
+                                        <input type="text" name="department" class="form-control"
+                                            value="{{ auth()->user()->departments()->name_departments ?? '-' }}">
                                     </div>
                                 </div>
 
@@ -38,7 +39,7 @@
                                     <label class="form-label fw-bold">Tanggal Lembur</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                        <input type="date" name="tanggal[]" class="form-control" required>
+                                        <input type="date" name="tanggal" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -46,14 +47,23 @@
                                     <label class="form-label fw-bold">Jam Kerja</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-clock"></i></span>
-                                        <input type="text" name="jam_kerja[]" class="form-control"
+                                        <input type="text" name="jam_kerja" class="form-control"
                                             placeholder="Contoh: 16:00 - 19:00" required>
                                     </div>
                                 </div>
 
+                                <!-- <div class="col-md-6">
+                                    <label class="form-label fw-bold">Jumlah Jam Kerja</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                        <input type="text" name="jam_kerja" class="form-control"
+                                            placeholder="" required>
+                                    </div>
+                                </div> -->
+
                                 <div class="col-12">
                                     <label class="form-label fw-bold">Keterangan</label>
-                                    <textarea name="keterangan[]" rows="3" class="form-control"
+                                    <textarea name="keterangan" rows="3" class="form-control"
                                         placeholder="Tulis keterangan jika perlu..."></textarea>
                                 </div>
                             </div>
@@ -68,7 +78,8 @@
                             <i class="fas fa-user-plus me-2"></i>Tambah Teman
                         </a>
                         <button type="submit" class="btn btn-primary rounded-pill px-4">
-                            <i class="fas fa-paper-plane me-2"></i>Submit
+                            <a href="{{ route('lemburSaya') }}"></a>
+                            <i class="fas fa-paper-plane me-2" ></i>Submit
                         </button>
                     </div>
                 </form>
@@ -96,4 +107,5 @@
             });
         });
     </script>
+
 @endsection
