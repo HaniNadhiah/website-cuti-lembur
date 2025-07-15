@@ -23,7 +23,7 @@
   <!-- Navbar Header -->
   <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
     <div class="container-fluid">
-      <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+      <!-- <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
         <div class="input-group">
           <div class="input-group-prepend">
             <button type="submit" class="btn btn-search pe-1">
@@ -32,7 +32,7 @@
           </div>
           <input type="text" placeholder="Search ..." class="form-control" />
         </div>
-      </nav>
+      </nav> -->
 
       <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
         <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
@@ -40,13 +40,13 @@
             aria-haspopup="true">
             <i class="fa fa-search"></i>
           </a>
-          <ul class="dropdown-menu dropdown-search animated fadeIn">
+          <!-- <ul class="dropdown-menu dropdown-search animated fadeIn">
             <form class="navbar-left navbar-form nav-search">
               <div class="input-group">
                 <input type="text" placeholder="Search ..." class="form-control" />
               </div>
             </form>
-          </ul>
+          </ul> -->
         </li>
         <li class="nav-item topbar-icon dropdown hidden-caret">
           <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-bs-toggle="dropdown"
@@ -120,10 +120,13 @@
             <div class="avatar-sm">
               <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
             </div>
-            <span class="profile-username">
-              <span class="op-7">Hi,</span>
-              <span class="fw-bold">{{ Auth::user()->name }}</span>
-            </span>
+            @auth
+        <span class="profile-username">
+          <span class="op-7">Hi,</span>
+          <span class="fw-bold">{{ Auth::user()->name }}</span>
+        </span>
+      @endauth
+
           </a>
           <ul class="dropdown-menu dropdown-user animated fadeIn">
             <div class="dropdown-user-scroll scrollbar-outer">
@@ -133,8 +136,10 @@
                     <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
                   </div>
                   <div class="u-text">
+                    @auth
                     <h4>{{ Auth::user()->name }}</h4>
                     <p class="text-muted">{{ Auth::user()->email }}</p>
+                    @endauth
                     <a href="profile.html" class="btn btn-xs btn-primary btn-sm">View Profile</a>
                   </div>
 
